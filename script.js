@@ -5,18 +5,18 @@ const api = {
     key: "d919334e6aee33871db917f5784cfaff"
 }
 
-const button = document.querySelector("#get-weather");
-button.addEventListener("click", enter) //нажатие кнопки
 
+const button = document.querySelector("#get-weather");
 const input = document.querySelector("#city-input");
-input.addEventListener("keydown", enter);
-//1-если нажата клавиша enter(13)и получить доступ к написанному 
-//2- то запуститься поиск(getInfo)
-function enter(e) {
-    if (e.keyCode === 13) {
+
+
+button.addEventListener("click", () => getInfo(input.value));
+input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
         getInfo(input.value);
     }
-}
+});
+
 //получаем доступ к ссылке endpoint c нашим ключом api.key, с русским яз.
 async function getInfo(data) {
     const result = await fetch(`${api.endpoint}weather?q=${data}&units=metric&appID=${api.key}&lang=ru`);
